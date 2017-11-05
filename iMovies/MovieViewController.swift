@@ -10,30 +10,100 @@ import UIKit
 import iCarousel
 import AlamofireImage
 import KRProgressHUD
+import CoreData
 
-class MovieViewController: UIViewController, UISearchBarDelegate, iCarouselDelegate, iCarouselDataSource {
+class MovieViewController: UIViewController, UISearchBarDelegate {
     
+    @IBOutlet var clickMovieLabel: UILabel!
+    @IBOutlet var addButton: UIButton!
+    @IBOutlet var containerView: UIView!
+    @IBOutlet var notFoundMovieView: UIView!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var iCarouselView: iCarousel!
     var rightButton: UIButton?
     var moviesList : Movies?
     var pageNumber : Int = 2
     var totalPages : Int?
     var searchBar : UISearchBar?
     var movieSelectedId : String?
+    var moviesCoreData : [NSManagedObject]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+//        self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.setupNavigationBar()
         self.searchBar?.delegate = self
-        //iCarouselView.reloadData()
-        //iCarouselView.type = .rotary
-        self.getMoviesList(movieName: "back", pageNumber: "")
+        
+        //self.getMoviesList(movieName: "back", pageNumber: "")
+        self.showAddedButton()
+        
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.searchBar?.text = nil
+        self.searchBar?.setShowsCancelButton(false, animated: true)
+        
+        // Remove focus from the search bar.
+        self.searchBar?.endEditing(true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.moviesCoreData = ServiceHelper().getMoviesCoreData()
+        if (self.moviesCoreData?.count)! > 0 {
+            self.addButton.isHidden = true
+            self.clickMovieLabel.isHidden = true
+        } else {
+            self.setGradientView()
+            self.addButton.isHidden = false
+            self.clickMovieLabel.isHidden = false
+        }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    func showAddedButton() {
+        self.moviesCoreData = ServiceHelper().getMoviesCoreData()
+        
+        if (self.moviesCoreData?.count)! == 0 {
+            self.tableView.isHidden = true
+            self.containerView.isHidden = true
+            self.clickMovieLabel.isHidden = false
+            self.addButton.isHidden = false
+            //let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+            
+//            self.view.backgroundColor = UIColor.clear
+//            
+//            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+//            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            //always fill the view
+//            blurEffectView.frame = self.view.bounds
+//            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            
+//            self.view.addSubview(blurEffectView)
+            
+            self.setGradientView()
+            
+        }
+    }
+    
+    func setGradientView() {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        //gradient.colors = [UIColor.black.cgColor,UIColor(red: 128, green: 0, blue: 0, alpha: 1), UIColor.red.cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
+        
+        gradient.colors = [UIColor.black.cgColor,UIColor.lightGray.cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
+        //gradient.colors = [UIColor(red: 69, green: 183, blue: 227, alpha: 1).cgColor,UIColor(red: 151, green: 99, blue: 57, alpha: 1).cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
+        
+        //69,183,227
+        //151,99,57
+        view.layer.insertSublayer(gradient, at: 0)
+    }
     func totalPages(totalPages : String) -> Int {
             
             let totalResultsInt = Int(totalPages)
@@ -50,8 +120,14 @@ class MovieViewController: UIViewController, UISearchBarDelegate, iCarouselDeleg
         
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.tableView.isHidden = false
+        self.containerView.isHidden = true
+        self.addButton.isHidden = true
+        self.clickMovieLabel.isHidden = true
         self.getMoviesList(movieName: searchBar.text!, pageNumber: "")
         self.tableView.reloadData()
+        self.setGradientView()
+        
     }
     
     func getMoviesList(movieName : String, pageNumber: String) {
@@ -90,44 +166,75 @@ class MovieViewController: UIViewController, UISearchBarDelegate, iCarouselDeleg
         }
     }
     
-    func numberOfItems(in carousel: iCarousel) -> Int {
-        return 5
-    }
     
-    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        
-        let tempView = UIView(frame: CGRect(x:0, y:0, width: 200, height: 200))
-        tempView.backgroundColor = UIColor.white
-        return tempView
-    }
     
     func addTapped(sender: UIBarButtonItem) {
+        
         self.createSearchBar()
+        
     }
     func setupNavigationBar() {
-        let logo = UIImage(named: "logoImage")
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        imageView.image = logo
-        imageView.contentMode = .scaleAspectFit // set imageview's content mode
-        self.navigationItem.titleView = imageView
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.title = "iMovie"
+        self.navigationItem.title = "iMovie"
+        let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
+//        let logo = UIImage(named: "logoImage")
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+//        imageView.image = logo
+//        imageView.contentMode = .scaleAspectFit // set imageview's content mode
+//        self.navigationItem.titleView = imageView
+        
         
         self.rightButton = UIButton.init(type: .custom)
-        self.rightButton?.setImage(UIImage(named: "searchIcon"), for: UIControlState.normal)
+        self.rightButton?.titleLabel?.textAlignment = .right
+        self.rightButton?.titleLabel?.font = UIFont(name: "Helvetica" , size: 12)
+        self.rightButton?.titleEdgeInsets = UIEdgeInsetsMake(5, 0, 0, 0)
+        //if self.cancelButtonShowed {
+        //    self.rightButton?.setTitle("Cancel", for: .normal)
+        //} else {
+            self.rightButton?.setImage(UIImage(named: "searchIcon"), for: UIControlState.normal)
+        //}
         self.rightButton?.isUserInteractionEnabled = true
         self.rightButton?.addTarget(self, action:  #selector(addTapped(sender:)), for: .touchUpInside)
-        self.rightButton?.frame = CGRect(x: 0, y: 0, width: 30, height: 25)
+        self.rightButton?.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
         let buttonBar = UIBarButtonItem.init(customView: self.rightButton!)
         self.navigationItem.rightBarButtonItem = buttonBar
     }
     func createSearchBar() {
         
+        self.navigationItem.rightBarButtonItem = nil
         self.searchBar = UISearchBar()
-        self.searchBar?.showsCancelButton = false
+        
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Helvetica", size: 12)!,NSForegroundColorAttributeName : UIColor.white], for: .normal)
+        
         self.searchBar?.placeholder = "Digite algo"
         self.searchBar?.delegate = self
         
         self.navigationItem.titleView = searchBar
-        self.rightButton?.titleLabel?.text = "Cancel"
+        //self.searchBar?.showsCancelButton = true
+        self.searchBar?.setShowsCancelButton(true, animated: true)
+        self.searchBar?.becomeFirstResponder()
+        //self.setupNavigationBar()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar?.setShowsCancelButton(false, animated: true)
+        self.searchBar?.removeFromSuperview()
+        self.setupNavigationBar()
+        self.tableView.isHidden = true
+        self.notFoundMovieView.isHidden = true
+        self.containerView.isHidden = false
+        
+        
+        if self.moviesCoreData?.count == 0 {
+            self.addButton.isHidden = false
+            self.clickMovieLabel.isHidden = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,6 +248,9 @@ class MovieViewController: UIViewController, UISearchBarDelegate, iCarouselDeleg
             movieDetailViewController.movieId = self.movieSelectedId
         }
     }
+    @IBAction func addButton(_ sender: Any) {
+        self.createSearchBar()
+    }
 }
 
 extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
@@ -151,9 +261,20 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+
+        
         if self.moviesList == nil {
+            self.tableView.isHidden = true
+            if self.searchBar?.text != nil && self.searchBar?.text != ""{
+                self.notFoundMovieView.isHidden = false
+
+            }
+            
             return 0
         } else {
+            self.tableView.isHidden = false
+            self.notFoundMovieView.isHidden = true
+            self.addButton.isHidden = true
             return (self.moviesList?.search?.count)!
         }
         
@@ -162,12 +283,15 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = bgColorView
         let item = self.moviesList?.search?[indexPath.row]
         let imageView = cell.contentView.viewWithTag(1) as! UIImageView
         let titleLabel = cell.contentView.viewWithTag(2) as! UILabel
-        let yearLabel = cell.contentView.viewWithTag(3) as! UILabel
+        //let yearLabel = cell.contentView.viewWithTag(3) as! UILabel
         titleLabel.text = item?.title
-        yearLabel.text = item?.year
+        //yearLabel.text = item?.year
         let downloadURL = NSURL(string: (item?.posterImage)!)
         imageView.af_setImage(withURL: downloadURL! as URL)
         return cell
@@ -200,6 +324,15 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
 //            print(self.selectedCoutries)
 //        }
         
+    }
+}
+
+extension UIImageView{
+    func addBlackGradientLayer(frame: CGRect, colors:[UIColor]){
+        let gradient = CAGradientLayer()
+        gradient.frame = frame
+        gradient.colors = colors.map{$0.cgColor}
+        self.layer.addSublayer(gradient)
     }
 }
 

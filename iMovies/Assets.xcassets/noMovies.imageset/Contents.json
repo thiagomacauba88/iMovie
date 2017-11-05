@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "happy-puppy-face-clipart-sad-face-clip-art-black-and-white-face_sad_black_white_line_art-1979px.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "happy-puppy-face-clipart-sad-face-clip-art-black-and-white-face_sad_black_white_line_art-1979px-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "happy-puppy-face-clipart-sad-face-clip-art-black-and-white-face_sad_black_white_line_art-1979px-2.png",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

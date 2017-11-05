@@ -21,6 +21,7 @@
 		AF1690F61FAB849F00EBEBAD /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F51FAB849F00EBEBAD /* Movies.swift */; };
 		AF1690F81FABAE7B00EBEBAD /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */; };
 		AF1690FA1FABB24B00EBEBAD /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */; };
+		AF43B1681FAD3ABD001D65BD /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */; };
 		F835AD7272DA480FB88BB32A /* Pods_iMoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C238F367D7E9D0ED2A14B0E /* Pods_iMoviesTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		AF1690F51FAB849F00EBEBAD /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		AF9F96E395B5B035E52D77F3 /* Pods-iMoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09615989B8E4F7CC41BC685 /* Pods-iMoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C4FCA60CA943F541860E3804 /* Pods_iMoviesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMoviesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 				AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */,
 				AF1690F51FAB849F00EBEBAD /* Movies.swift */,
 				AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */,
+				AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */,
 			);
 			path = iMovies;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				AF1690FA1FABB24B00EBEBAD /* MovieDetail.swift in Sources */,
 				AF1690C91FAB675F00EBEBAD /* iMovies.xcdatamodeld in Sources */,
 				AF1690C31FAB675F00EBEBAD /* MovieViewController.swift in Sources */,
+				AF43B1681FAD3ABD001D65BD /* CarouselViewController.swift in Sources */,
 				AF1690C11FAB675F00EBEBAD /* AppDelegate.swift in Sources */,
 				AF1690F81FABAE7B00EBEBAD /* MovieDetailViewController.swift in Sources */,
 				AF1690F41FAB7C0500EBEBAD /* ServiceHelper.swift in Sources */,

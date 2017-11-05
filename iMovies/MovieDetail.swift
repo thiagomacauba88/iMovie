@@ -21,9 +21,9 @@ class MovieDetail: Mappable {
     var plot : String?
     var runtime : String?
     var posterImage : String?
+    var imdbID : String?
     
     required init?(map: Map){
-        
     }
     
     func mapping(map: Map) {
@@ -36,6 +36,7 @@ class MovieDetail: Mappable {
         plot <- map["Plot"]
         runtime <- map["Runtime"]
         posterImage <- map["Poster"]
+        imdbID <- map["imdbID"]
     }
     
 }
