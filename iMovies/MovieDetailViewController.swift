@@ -41,13 +41,7 @@ class MovieDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
-        
-        //ServiceHelper().removeMovieCoreData(movieId: (self.movieCoreData?.value(forKey: "imdbID") as? String)!)
-        //ServiceHelper().saveMovieCoredata(movie: self.movie!)
         self.getMoviesById(movieId: self.movieId!)
-        
-        print(movieId)
-        // Do any additional setup after loading the view.
     }
     
     func setRightButton(isWhatched: Bool){
@@ -129,36 +123,10 @@ class MovieDetailViewController: UIViewController {
                  self.setupComponents(movie: self.movie!)
             })
         }
-        
-        
-        /*ServiceHelper().getMovieById(movieId: movieId, handler: {
-            (movie) in
-            self.setupComponents(movie: movie.value!)
-            self.movie = movie.value
-            /*ServiceHelper().saveMovieCoredata(movie: self.movie!)
-            
-            if let movieId = self.movieId{
-                self.movieCoreData = ServiceHelper().getMovieById(uid: movieId)
-                self.movie?.actors = self.movieCoreData?.value(forKey: "actors") as? String
-                self.movie?.director = self.movieCoreData?.value(forKey: "director") as? String
-                self.movie?.genre = self.movieCoreData?.value(forKey: "genre") as? String
-                self.movie?.imdbID = self.movieCoreData?.value(forKey: "imdID") as? String
-                self.movie?.plot = self.movieCoreData?.value(forKey: "plot") as? String
-                self.movie?.posterImage = self.movieCoreData?.value(forKey: "posterImage") as? String
-                self.movie?.released = self.movieCoreData?.value(forKey: "released") as? String
-                self.movie?.runtime = self.movieCoreData?.value(forKey: "runtime") as? String
-                self.movie?.title = self.movieCoreData?.value(forKey: "title") as? String
-                self.movie?.year = self.movieCoreData?.value(forKey: "year") as? String
-            }
-            self.setupComponents(movie: self.movie!)*/
-        })*/
     }
     
-    func fillModelByCoreData()/* -> MovieDetail*/{
-        
-        
+    func fillModelByCoreData(){
         self.title = self.movieCoreData?.value(forKey: "title") as? String
-        
         self.yearLabel.text = self.movieCoreData?.value(forKey: "year") as? String
         self.releasedLabel.text = self.movieCoreData?.value(forKey: "released") as? String
         self.genreLabel.text = self.movieCoreData?.value(forKey: "genre") as? String
@@ -171,35 +139,9 @@ class MovieDetailViewController: UIViewController {
         self.imageView.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
-        
-//        self.movie?.actors = self.movieCoreData?.value(forKey: "actors") as? String
-//        self.movie?.director = self.movieCoreData?.value(forKey: "director") as? String
-//        self.movie?.genre = self.movieCoreData?.value(forKey: "genre") as? String
-//        self.movie?.imdbID = self.movieCoreData?.value(forKey: "imdID") as? String
-//        self.movie?.plot = self.movieCoreData?.value(forKey: "plot") as? String
-//        self.movie?.posterImage = self.movieCoreData?.value(forKey: "posterImage") as? String
-//        self.movie?.released = self.movieCoreData?.value(forKey: "released") as? String
-//        self.movie?.runtime = self.movieCoreData?.value(forKey: "runtime") as? String
-//        self.movie?.title = self.movieCoreData?.value(forKey: "title") as? String
-//        self.movie?.year = self.movieCoreData?.value(forKey: "year") as? String
-        
-        //return self.movie!
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

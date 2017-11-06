@@ -8,12 +8,14 @@
 
 import UIKit
 import iCarousel
+import Alamofire
 import AlamofireImage
 import KRProgressHUD
 import CoreData
 
 class MovieViewController: UIViewController, UISearchBarDelegate {
     
+    @IBOutlet var notFoundLabel: UILabel!
     @IBOutlet var clickMovieLabel: UILabel!
     @IBOutlet var addButton: UIButton!
     @IBOutlet var containerView: UIView!
@@ -27,40 +29,34 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     var movieSelectedId : String?
     var moviesCoreData : [NSManagedObject]?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-//        self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.setupNavigationBar()
         self.searchBar?.delegate = self
-        
-        //self.getMoviesList(movieName: "back", pageNumber: "")
         self.showAddedButton()
-        
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationItem.titleView = nil
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        self.searchBar?.text = nil
-        self.searchBar?.setShowsCancelButton(false, animated: true)
-        
-        // Remove focus from the search bar.
-        self.searchBar?.endEditing(true)
-    }
     override func viewWillAppear(_ animated: Bool) {
         self.moviesCoreData = ServiceHelper().getMoviesCoreData()
         if (self.moviesCoreData?.count)! > 0 {
             self.addButton.isHidden = true
             self.clickMovieLabel.isHidden = true
+            self.containerView.isHidden = false
         } else {
             self.setGradientView()
             self.addButton.isHidden = false
             self.clickMovieLabel.isHidden = false
         }
+        if self.navigationItem.titleView == nil{
+            self.tableView.isHidden = true
+        }
+        self.setupNavigationBar()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -69,72 +65,45 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     
     func showAddedButton() {
         self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        
         if (self.moviesCoreData?.count)! == 0 {
             self.tableView.isHidden = true
             self.containerView.isHidden = true
             self.clickMovieLabel.isHidden = false
             self.addButton.isHidden = false
-            //let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-            
-//            self.view.backgroundColor = UIColor.clear
-//            
-//            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-//            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//            //always fill the view
-//            blurEffectView.frame = self.view.bounds
-//            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            
-//            self.view.addSubview(blurEffectView)
-            
             self.setGradientView()
-            
         }
     }
     
     func setGradientView() {
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        //gradient.colors = [UIColor.black.cgColor,UIColor(red: 128, green: 0, blue: 0, alpha: 1), UIColor.red.cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
-        
-        gradient.colors = [UIColor.black.cgColor,UIColor.lightGray.cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
-        //gradient.colors = [UIColor(red: 69, green: 183, blue: 227, alpha: 1).cgColor,UIColor(red: 151, green: 99, blue: 57, alpha: 1).cgColor]//UIColor(red: 128, green: 0, blue: 0, alpha: 1).cgColor]
-        
-        //69,183,227
-        //151,99,57
+        gradient.colors = [UIColor.black.cgColor,UIColor.black.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor, UIColor.lightGray.cgColor, UIColor.white.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
     }
     func totalPages(totalPages : String) -> Int {
-            
             let totalResultsInt = Int(totalPages)
             self.totalPages = Int(totalPages)!-Int(totalPages)!%10
             self.totalPages = self.totalPages!/10
-            
             if totalResultsInt!%10 != 0{
                 self.totalPages? += 1
             }
-            
-            print (self.totalPages)
             return self.totalPages!
-
-        
     }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.tableView.isHidden = false
         self.containerView.isHidden = true
         self.addButton.isHidden = true
         self.clickMovieLabel.isHidden = true
-        self.getMoviesList(movieName: searchBar.text!, pageNumber: "")
+        let searchText = searchBar.text?.replacingOccurrences(of: " ", with: "")
+        self.getMoviesList(movieName: searchText!, pageNumber: "")
         self.tableView.reloadData()
         self.setGradientView()
-        
     }
     
     func getMoviesList(movieName : String, pageNumber: String) {
-        
         ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
             (moviesList) in
-            
             if moviesList.value?.response != "False" {
                 self.totalPages = self.totalPages(totalPages: (moviesList.value?.totalResults)!)
                 //self.tableView.reloadData()
@@ -162,19 +131,18 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
             if self.pageNumber <= self.totalPages! {
                 self.getMoviesList(movieName: "back", pageNumber: self.pageNumber.description)
             }
-            
         }
     }
     
-    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        return true
+    }
     
     func addTapped(sender: UIBarButtonItem) {
-        
         self.createSearchBar()
-        
     }
+    
     func setupNavigationBar() {
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -183,21 +151,15 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
 //        let logo = UIImage(named: "logoImage")
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
 //        imageView.image = logo
 //        imageView.contentMode = .scaleAspectFit // set imageview's content mode
 //        self.navigationItem.titleView = imageView
-        
-        
         self.rightButton = UIButton.init(type: .custom)
         self.rightButton?.titleLabel?.textAlignment = .right
         self.rightButton?.titleLabel?.font = UIFont(name: "Helvetica" , size: 12)
         self.rightButton?.titleEdgeInsets = UIEdgeInsetsMake(5, 0, 0, 0)
-        //if self.cancelButtonShowed {
-        //    self.rightButton?.setTitle("Cancel", for: .normal)
-        //} else {
-            self.rightButton?.setImage(UIImage(named: "searchIcon"), for: UIControlState.normal)
-        //}
+        self.rightButton?.setImage(UIImage(named: "searchIcon"), for: UIControlState.normal)
         self.rightButton?.isUserInteractionEnabled = true
         self.rightButton?.addTarget(self, action:  #selector(addTapped(sender:)), for: .touchUpInside)
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
@@ -212,7 +174,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Helvetica", size: 12)!,NSForegroundColorAttributeName : UIColor.white], for: .normal)
         
-        self.searchBar?.placeholder = "Digite algo"
+        self.searchBar?.placeholder = "Tap a movie name"
         self.searchBar?.delegate = self
         
         self.navigationItem.titleView = searchBar
@@ -225,6 +187,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar?.setShowsCancelButton(false, animated: true)
         self.searchBar?.removeFromSuperview()
+        self.navigationItem.titleView = nil
         self.setupNavigationBar()
         self.tableView.isHidden = true
         self.notFoundMovieView.isHidden = true
@@ -275,6 +238,13 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
             self.tableView.isHidden = false
             self.notFoundMovieView.isHidden = true
             self.addButton.isHidden = true
+            if !(NetworkReachabilityManager()?.isReachable)! {
+                self.tableView.isHidden = true
+                self.notFoundMovieView.isHidden = false
+                self.notFoundLabel.text = "No internet connection!"
+            } else {
+                self.notFoundLabel.text = "Movie not Found!"
+            }
             return (self.moviesList?.search?.count)!
         }
         
