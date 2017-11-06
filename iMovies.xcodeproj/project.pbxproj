@@ -50,7 +50,7 @@
 		8B476AF5BF37CA962680700F /* Pods-iMoviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesTests/Pods-iMoviesTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF1690BD1FAB675F00EBEBAD /* iMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF1690C21FAB675F00EBEBAD /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		AF1690C21FAB675F00EBEBAD /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = "../New Group/MovieViewController.swift"; sourceTree = "<group>"; };
 		AF1690C51FAB675F00EBEBAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF1690C81FAB675F00EBEBAD /* iMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iMovies.xcdatamodel; sourceTree = "<group>"; };
 		AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		AF1690F31FAB7C0500EBEBAD /* ServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		AF1690F51FAB849F00EBEBAD /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
-		AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetail.swift; path = "../New Group1/MovieDetail.swift"; sourceTree = "<group>"; };
 		AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		AF9F96E395B5B035E52D77F3 /* Pods-iMoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09615989B8E4F7CC41BC685 /* Pods-iMoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +114,39 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9117D6761FB0B22800E6ADE1 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */,
+				AF1690C41FAB675F00EBEBAD /* Main.storyboard */,
+				AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */,
+				AF1690CC1FAB675F00EBEBAD /* LaunchScreen.storyboard */,
+				AF1690C71FAB675F00EBEBAD /* iMovies.xcdatamodeld */,
+				AF1690F31FAB7C0500EBEBAD /* ServiceHelper.swift */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		911DF9961FB0B1BA00D15DF4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690F51FAB849F00EBEBAD /* Movies.swift */,
+				AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		917041C91FB0B0560023B8E9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */,
+				AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */,
+				AF1690C21FAB675F00EBEBAD /* MovieViewController.swift */,
+			);
+			name = Controllers;
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		A7253D4B7CAA2BBC4FFA341C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,18 +182,10 @@
 		AF1690BF1FAB675F00EBEBAD /* iMovies */ = {
 			isa = PBXGroup;
 			children = (
-				AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */,
-				AF1690C21FAB675F00EBEBAD /* MovieViewController.swift */,
-				AF1690C41FAB675F00EBEBAD /* Main.storyboard */,
-				AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */,
-				AF1690CC1FAB675F00EBEBAD /* LaunchScreen.storyboard */,
 				AF1690CF1FAB675F00EBEBAD /* Info.plist */,
-				AF1690C71FAB675F00EBEBAD /* iMovies.xcdatamodeld */,
-				AF1690F31FAB7C0500EBEBAD /* ServiceHelper.swift */,
-				AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */,
-				AF1690F51FAB849F00EBEBAD /* Movies.swift */,
-				AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */,
-				AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */,
+				9117D6761FB0B22800E6ADE1 /* SupportFiles */,
+				911DF9961FB0B1BA00D15DF4 /* Models */,
+				917041C91FB0B0560023B8E9 /* Controllers */,
 			);
 			path = iMovies;
 			sourceTree = "<group>";

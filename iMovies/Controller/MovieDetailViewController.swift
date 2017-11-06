@@ -64,6 +64,8 @@ class MovieDetailViewController: UIViewController {
         self.rightButton?.isUserInteractionEnabled = true
         self.rightButton?.addTarget(self, action:  #selector(watchedButton(sender:)), for: .touchUpInside)
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        self.rightButton?.widthAnchor.constraint(equalToConstant: 20.0).isActive = true
+        self.rightButton?.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         let buttonBar = UIBarButtonItem.init(customView: self.rightButton!)
         self.navigationItem.rightBarButtonItem = buttonBar
     }

@@ -164,6 +164,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.rightButton?.addTarget(self, action:  #selector(addTapped(sender:)), for: .touchUpInside)
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
         let buttonBar = UIBarButtonItem.init(customView: self.rightButton!)
+        self.rightButton?.widthAnchor.constraint(equalToConstant: 18.0).isActive = true
+        self.rightButton?.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         self.navigationItem.rightBarButtonItem = buttonBar
     }
     func createSearchBar() {

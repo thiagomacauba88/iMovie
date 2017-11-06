@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
+import ObjectMapper
 
 class Movies: Mappable {
     
