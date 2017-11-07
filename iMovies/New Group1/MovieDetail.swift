@@ -38,5 +38,4 @@ class MovieDetail: Mappable {
         posterImage <- map["Poster"]
         imdbID <- map["imdbID"]
     }
-    
 }

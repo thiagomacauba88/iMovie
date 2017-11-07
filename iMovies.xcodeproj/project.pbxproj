@@ -21,6 +21,7 @@
 		AF1690F61FAB849F00EBEBAD /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F51FAB849F00EBEBAD /* Movies.swift */; };
 		AF1690F81FABAE7B00EBEBAD /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */; };
 		AF1690FA1FABB24B00EBEBAD /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */; };
+		AF22B3811FB1389900DD8CBF /* Extension+UImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF22B3801FB1389900DD8CBF /* Extension+UImageView.swift */; };
 		AF43B1681FAD3ABD001D65BD /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */; };
 		F835AD7272DA480FB88BB32A /* Pods_iMoviesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C238F367D7E9D0ED2A14B0E /* Pods_iMoviesTests.framework */; };
 /* End PBXBuildFile section */
@@ -49,11 +50,11 @@
 		6C238F367D7E9D0ED2A14B0E /* Pods_iMoviesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMoviesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B476AF5BF37CA962680700F /* Pods-iMoviesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesTests/Pods-iMoviesTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF1690BD1FAB675F00EBEBAD /* iMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SupportFiles/AppDelegate.swift; sourceTree = "<group>"; };
 		AF1690C21FAB675F00EBEBAD /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = "../New Group/MovieViewController.swift"; sourceTree = "<group>"; };
 		AF1690C51FAB675F00EBEBAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF1690C81FAB675F00EBEBAD /* iMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iMovies.xcdatamodel; sourceTree = "<group>"; };
-		AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = SupportFiles/Assets.xcassets; sourceTree = "<group>"; };
 		AF1690CD1FAB675F00EBEBAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF1690CF1FAB675F00EBEBAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF1690D41FAB675F00EBEBAD /* iMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +67,7 @@
 		AF1690F51FAB849F00EBEBAD /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 		AF1690F71FABAE7B00EBEBAD /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		AF1690F91FABB24B00EBEBAD /* MovieDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieDetail.swift; path = "../New Group1/MovieDetail.swift"; sourceTree = "<group>"; };
+		AF22B3801FB1389900DD8CBF /* Extension+UImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Extension+UImageView.swift"; path = "../Extension+UImageView.swift"; sourceTree = "<group>"; };
 		AF43B1671FAD3ABD001D65BD /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		AF9F96E395B5B035E52D77F3 /* Pods-iMoviesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B09615989B8E4F7CC41BC685 /* Pods-iMoviesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMoviesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMoviesUITests/Pods-iMoviesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,16 +116,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9117D6761FB0B22800E6ADE1 /* SupportFiles */ = {
+		9117D6761FB0B22800E6ADE1 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */,
-				AF1690C41FAB675F00EBEBAD /* Main.storyboard */,
-				AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */,
-				AF1690CC1FAB675F00EBEBAD /* LaunchScreen.storyboard */,
-				AF1690C71FAB675F00EBEBAD /* iMovies.xcdatamodeld */,
-				AF1690F31FAB7C0500EBEBAD /* ServiceHelper.swift */,
+				AF22B3831FB139AE00DD8CBF /* ServiceManager */,
+				AF22B3821FB1398300DD8CBF /* Extensions */,
 			);
+			name = Support;
 			path = SupportFiles;
 			sourceTree = "<group>";
 		};
@@ -182,8 +181,11 @@
 		AF1690BF1FAB675F00EBEBAD /* iMovies */ = {
 			isa = PBXGroup;
 			children = (
+				AF22B3841FB13A0600DD8CBF /* Modules */,
 				AF1690CF1FAB675F00EBEBAD /* Info.plist */,
-				9117D6761FB0B22800E6ADE1 /* SupportFiles */,
+				AF1690C01FAB675F00EBEBAD /* AppDelegate.swift */,
+				AF1690CA1FAB675F00EBEBAD /* Assets.xcassets */,
+				9117D6761FB0B22800E6ADE1 /* Support */,
 				911DF9961FB0B1BA00D15DF4 /* Models */,
 				917041C91FB0B0560023B8E9 /* Controllers */,
 			);
@@ -206,6 +208,48 @@
 				AF1690E51FAB676000EBEBAD /* Info.plist */,
 			);
 			path = iMoviesUITests;
+			sourceTree = "<group>";
+		};
+		AF22B3821FB1398300DD8CBF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AF22B3801FB1389900DD8CBF /* Extension+UImageView.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		AF22B3831FB139AE00DD8CBF /* ServiceManager */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690F31FAB7C0500EBEBAD /* ServiceHelper.swift */,
+			);
+			name = ServiceManager;
+			sourceTree = "<group>";
+		};
+		AF22B3841FB13A0600DD8CBF /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				AF22B3861FB13A3200DD8CBF /* Data */,
+				AF22B3851FB13A0C00DD8CBF /* Presenter */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		AF22B3851FB13A0C00DD8CBF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690C41FAB675F00EBEBAD /* Main.storyboard */,
+				AF1690CC1FAB675F00EBEBAD /* LaunchScreen.storyboard */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		AF22B3861FB13A3200DD8CBF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF1690C71FAB675F00EBEBAD /* iMovies.xcdatamodeld */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF22B3811FB1389900DD8CBF /* Extension+UImageView.swift in Sources */,
 				AF1690F61FAB849F00EBEBAD /* Movies.swift in Sources */,
 				AF1690FA1FABB24B00EBEBAD /* MovieDetail.swift in Sources */,
 				AF1690C91FAB675F00EBEBAD /* iMovies.xcdatamodeld in Sources */,
@@ -564,6 +609,7 @@
 				AF1690C51FAB675F00EBEBAD /* Base */,
 			);
 			name = Main.storyboard;
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		AF1690CC1FAB675F00EBEBAD /* LaunchScreen.storyboard */ = {
@@ -572,6 +618,7 @@
 				AF1690CD1FAB675F00EBEBAD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -804,7 +851,8 @@
 				AF1690C81FAB675F00EBEBAD /* iMovies.xcdatamodel */,
 			);
 			currentVersion = AF1690C81FAB675F00EBEBAD /* iMovies.xcdatamodel */;
-			path = iMovies.xcdatamodeld;
+			name = iMovies.xcdatamodeld;
+			path = SupportFiles/iMovies.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

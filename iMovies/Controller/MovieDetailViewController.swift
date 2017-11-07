@@ -15,6 +15,7 @@ import ObjectMapper
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var teste: UILabel!
@@ -35,7 +36,6 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -47,11 +47,7 @@ class MovieDetailViewController: UIViewController {
     func setRightButton(isWhatched: Bool){
         self.rightButton = UIButton.init(type: .custom)
         self.rightButton?.titleLabel?.textAlignment = .right
-        //self.rightButton?.titleLabel?.font = UIFont(name: "Helvetica" , size: 12)
         self.rightButton?.titleEdgeInsets = UIEdgeInsetsMake(5, 0, 0, 0)
-        //if self.cancelButtonShowed {
-        //    self.rightButton?.setTitle("Cancel", for: .normal)
-        //} else {
         if isWhatched {
             self.rightButton?.setImage(UIImage(named: "savedIcon"), for: UIControlState.normal)
             self.rightButton?.tag = 1
@@ -59,8 +55,6 @@ class MovieDetailViewController: UIViewController {
             self.rightButton?.setImage(UIImage(named: "notSavedIcon"), for: UIControlState.normal)
             self.rightButton?.tag = 0
         }
-        
-        //}
         self.rightButton?.isUserInteractionEnabled = true
         self.rightButton?.addTarget(self, action:  #selector(watchedButton(sender:)), for: .touchUpInside)
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
@@ -71,12 +65,10 @@ class MovieDetailViewController: UIViewController {
     }
     
     func watchedButton(sender: UIButton) {
-        
         if sender.tag == 0 {
             self.setRightButton(isWhatched: true)
             ServiceHelper().saveMovieCoredata(movie: self.movie!)
             self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId!)
-            //self.movieCoreData = self.moviesCoreData?.first
         } else {
             self.setRightButton(isWhatched: false)
             ServiceHelper().removeMovieCoreData(movieId: (self.movieCoreData?.value(forKey: "imdbID") as? String)!)
@@ -92,7 +84,7 @@ class MovieDetailViewController: UIViewController {
     }
     func setupComponents(movie: MovieDetail) {
     
-        self.title = movie.title!
+        self.titleLabel.text = movie.title!
         self.yearLabel.text = movie.year
         self.releasedLabel.text = movie.released
         self.genreLabel.text = movie.genre
@@ -100,19 +92,16 @@ class MovieDetailViewController: UIViewController {
         self.actorsLabel.text = movie.actors
         self.plotTextView.text = movie.plot
         self.runtimeLabel.text = movie.runtime
-        
         let downloadURL = NSURL(string: (movie.posterImage)!)
-        self.imageView.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
-        self.setBackgroundImage()
     }
+    
     func getMoviesById(movieId : String) {
         
         self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
         if self.moviesCoreData?.count != 0 {
             self.movieCoreData = self.moviesCoreData?.first
-            //self.setupComponents(movie: self.fillModelByCoreData())
             self.fillModelByCoreData()
             self.setRightButton(isWhatched: true)
         } else {
@@ -121,14 +110,13 @@ class MovieDetailViewController: UIViewController {
                 self.setupComponents(movie: movie.value!)
                 self.movie = movie.value
                 self.setRightButton(isWhatched: false)
-                //ServiceHelper().saveMovieCoredata(movie: self.movie!)
                  self.setupComponents(movie: self.movie!)
             })
         }
     }
     
     func fillModelByCoreData(){
-        self.title = self.movieCoreData?.value(forKey: "title") as? String
+        self.titleLabel.text = self.movieCoreData?.value(forKey: "title") as? String
         self.yearLabel.text = self.movieCoreData?.value(forKey: "year") as? String
         self.releasedLabel.text = self.movieCoreData?.value(forKey: "released") as? String
         self.genreLabel.text = self.movieCoreData?.value(forKey: "genre") as? String
@@ -136,9 +124,7 @@ class MovieDetailViewController: UIViewController {
         self.actorsLabel.text = self.movieCoreData?.value(forKey: "actors") as? String
         self.plotTextView.text = self.movieCoreData?.value(forKey: "plot") as? String
         self.runtimeLabel.text = self.movieCoreData?.value(forKey: "runtime") as? String
-        self.setBackgroundImage()
         let downloadURL = NSURL(string: (self.movieCoreData?.value(forKey: "posterImage") as? String)!)
-        self.imageView.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
     }

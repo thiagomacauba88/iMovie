@@ -77,9 +77,7 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
         self.movieSelected = self.moviesCoreData?[index]
-        
         performSegue(withIdentifier: "movieDetailSegue", sender: self)
-        
     }
     
     func carouselDidScroll(_ carousel: iCarousel) {

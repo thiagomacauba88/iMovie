@@ -27,7 +27,6 @@ class Movies: Mappable {
         error <- map["Error"]
         response <- map["Response"]
     }
-
 }
 
 class Search: Mappable {
@@ -36,7 +35,6 @@ class Search: Mappable {
     var year : String?
     var imdbID : String?
     var posterImage : String?
-    
     
     required init?(map: Map){
         
