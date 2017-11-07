@@ -1,4 +1,4 @@
-# iMusic
+# iMovie
 ### Now you can save the movies and series that you watched!
 
 ### Installation
