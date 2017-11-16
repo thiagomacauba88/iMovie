@@ -102,6 +102,8 @@ class ServiceHelper: NSObject {
         let context = appDelegate.persistentContainer.viewContext
         let movieCoreData = NSEntityDescription.insertNewObject(forEntityName: "MovieDetailEntity", into: context)
         movieCoreData.setValue(movie.actors, forKey: "actors")
+        movieCoreData.setValue(movie.genre, forKey: "genre")
+        movieCoreData.setValue(movie.plot, forKey: "plot")
         movieCoreData.setValue(movie.imdbID, forKey: "imdbID")
         movieCoreData.setValue(movie.director, forKey: "director")
         movieCoreData.setValue(movie.posterImage, forKey: "posterImage")

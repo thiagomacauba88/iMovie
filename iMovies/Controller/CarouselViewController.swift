@@ -32,14 +32,25 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     func getMovieCoredata () {
         
         self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        if (self.moviesCoreData?.count)! > 0 {
+        guard let count = self.moviesCoreData?.count else {
+            return
+        }
+        if count > 0 {
             self.titleLabel.text = self.moviesCoreData?.first?.value(forKey: "title") as? String
-            self.titleLabel.text = self.titleLabel.text!+" ("
-            self.titleLabel.text = self.titleLabel.text!+(self.moviesCoreData?.first?.value(forKey: "year")as? String)!+")"
+            guard let titleLabelText = self.titleLabel.text else {
+                return
+            }
+            self.titleLabel.text = titleLabelText+" ("
+            guard let firstMovie = self.moviesCoreData?.first?.value(forKey: "year") as? String else {
+                return
+            }
+            self.titleLabel.text = self.titleLabel.text!+firstMovie+")"
             self.setBackgroundImage()
-            let imageUrl = self.moviesCoreData?.first?.value(forKey: "posterImage") as? String
-            let downloadURL = NSURL(string: imageUrl!)
-            self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
+            if let imageUrl = self.moviesCoreData?.first?.value(forKey: "posterImage") as? String {
+                if let downloadURL = NSURL(string: imageUrl) {
+                    self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+                }
+            }
             self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
         } else {
             self.titleLabel.text = ""
@@ -72,7 +83,11 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
         if self.moviesCoreData == nil {
             return 0
         }
-        return (self.moviesCoreData?.count)!
+        if let count = self.moviesCoreData?.count {
+            return count
+        } else {
+            return 0
+        }
     }
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
@@ -81,13 +96,19 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func carouselDidScroll(_ carousel: iCarousel) {
-        if self.moviesCoreData?.count != 0 {
+        guard let count = self.moviesCoreData?.count else {
+            return
+        }
+        if count != 0 {
             self.titleLabel.text = self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "title") as? String
             self.titleLabel.text = self.titleLabel.text!+" ("
             self.titleLabel.text = self.titleLabel.text!+(self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "year")as? String)!+")"
-            let imageUrl = self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "posterImage") as? String
-            let downloadURL = NSURL(string: imageUrl!)
-            self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
+            guard let imageUrl = self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "posterImage") as? String else {
+                return
+            }
+            if let downloadURL = NSURL(string: imageUrl) {
+                self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+            }
         }
     }
     
@@ -101,8 +122,12 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
         imageView.frame = frame
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFit
-        let downloadURL = NSURL(string: imageUrl!)
-        imageView.af_setImage(withURL: downloadURL! as URL)
+        if let image = imageUrl {
+            let downloadURL = NSURL(string: image)
+            if let url = downloadURL {
+                imageView.af_setImage(withURL: url as URL)
+            }
+        }
         tempView.addSubview(imageView)
         return tempView
     }

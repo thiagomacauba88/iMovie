@@ -24,7 +24,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     var rightButton: UIButton?
     var moviesList : Movies?
     var pageNumber : Int = 2
-    var totalPages : Int?
+    var totalPages : Int = 0
     var searchBar : UISearchBar?
     var movieSelectedId : String?
     var moviesCoreData : [NSManagedObject]?
@@ -44,7 +44,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        if (self.moviesCoreData?.count)! > 0 {
+        guard let moviesCount = self.moviesCoreData?.count else {
+            return
+        }
+        if moviesCount > 0 {
             self.addButton.isHidden = true
             self.clickMovieLabel.isHidden = true
             self.containerView.isHidden = false
@@ -65,7 +68,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     
     func showAddedButton() {
         self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        if (self.moviesCoreData?.count)! == 0 {
+        guard let moviesCount = self.moviesCoreData?.count else {
+            return
+        }
+        if moviesCount == 0 {
             self.tableView.isHidden = true
             self.containerView.isHidden = true
             self.clickMovieLabel.isHidden = false
@@ -81,13 +87,26 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         view.layer.insertSublayer(gradient, at: 0)
     }
     func totalPages(totalPages : String) -> Int {
-            let totalResultsInt = Int(totalPages)
-            self.totalPages = Int(totalPages)!-Int(totalPages)!%10
-            self.totalPages = self.totalPages!/10
-            if totalResultsInt!%10 != 0{
-                self.totalPages? += 1
+//        let totalResultsInt = Int(totalPages)
+//
+//            self.totalPages = Int(totalPages)!-Int(totalPages)!%10
+//            self.totalPages = self.totalPages!/10
+//            if totalResultsInt!%10 != 0{
+//                self.totalPages? += 1
+//            }
+//            return self.totalPages!
+        
+        if let totalResultsInt = Int(totalPages) {
+        
+            self.totalPages = totalResultsInt-totalResultsInt%10
+            
+            self.totalPages = self.totalPages/10
+            if totalResultsInt%10 != 0{
+                self.totalPages += 1
             }
-            return self.totalPages!
+        }
+        return self.totalPages
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -96,7 +115,9 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.addButton.isHidden = true
         self.clickMovieLabel.isHidden = true
         let searchText = searchBar.text?.replacingOccurrences(of: " ", with: "")
-        self.getMoviesList(movieName: searchText!, pageNumber: "")
+        if let searchTxt = searchText {
+            self.getMoviesList(movieName: searchTxt, pageNumber: "")
+        }
         self.tableView.reloadData()
         self.setGradientView()
     }
@@ -105,10 +126,16 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
             (moviesList) in
             if moviesList.value?.response != "False" {
-                self.totalPages = self.totalPages(totalPages: (moviesList.value?.totalResults)!)
+                guard let totalResults = moviesList.value?.totalResults else {
+                    return
+                }
+                self.totalPages = self.totalPages(totalPages: totalResults)
                 if pageNumber != "" {
                     self.pageNumber += 1
-                    for item in (moviesList.value?.search)! {
+                    guard let search = moviesList.value?.search else {
+                        return
+                    }
+                    for item in search {
                         self.moviesList?.search?.append(item)
                     }
                 } else {
@@ -125,7 +152,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
             KRProgressHUD.show()
-            if self.pageNumber <= self.totalPages! {
+            if self.pageNumber <= self.totalPages {
                 self.getMoviesList(movieName: "back", pageNumber: self.pageNumber.description)
             }
         }
@@ -155,7 +182,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.rightButton?.isUserInteractionEnabled = true
         self.rightButton?.addTarget(self, action:  #selector(addTapped(sender:)), for: .touchUpInside)
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
-        let buttonBar = UIBarButtonItem.init(customView: self.rightButton!)
+        guard let rightButton = self.rightButton else {
+            return
+        }
+        let buttonBar = UIBarButtonItem.init(customView: rightButton)
         self.rightButton?.widthAnchor.constraint(equalToConstant: 18.0).isActive = true
         self.rightButton?.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         self.navigationItem.rightBarButtonItem = buttonBar
@@ -167,7 +197,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     func createSearchBar() {
         self.navigationItem.rightBarButtonItem = nil
         self.searchBar = UISearchBar()
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Helvetica", size: 12)!,NSForegroundColorAttributeName : UIColor.white], for: .normal)
+        guard let font = UIFont(name: "Helvetica", size: 12) else {
+            return
+        }
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : font,NSForegroundColorAttributeName : UIColor.white], for: .normal)
         self.searchBar?.placeholder = "Tap a movie name"
         self.searchBar?.delegate = self
         self.navigationItem.titleView = searchBar
@@ -233,7 +266,11 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 self.notFoundLabel.text = "Movie not Found!"
             }
-            return (self.moviesList?.search?.count)!
+            if let count = self.moviesList?.search?.count {
+                return count
+            } else {
+                return 0
+            }
         }
     }
     
@@ -245,9 +282,12 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         let item = self.moviesList?.search?[indexPath.row]
         let imageView = cell.contentView.viewWithTag(1) as! UIImageView
         let titleLabel = cell.contentView.viewWithTag(2) as! UILabel
-        titleLabel.text = (item?.title)!+" ("+(item?.year)!+")"
-        let downloadURL = NSURL(string: (item?.posterImage)!)
-        imageView.af_setImage(withURL: downloadURL! as URL)
+        if let title = item?.title, let year = item?.year, let image = item?.posterImage {
+            titleLabel.text = title+" ("+year+")"
+            if let downloadURL = NSURL(string: image) {
+                imageView.af_setImage(withURL: downloadURL as URL)
+            }
+        }
         return cell
     }
     
