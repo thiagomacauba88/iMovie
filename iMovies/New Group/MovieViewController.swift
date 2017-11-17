@@ -121,7 +121,36 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.tableView.reloadData()
         self.setGradientView()
     }
-    
+    /*
+ func getMoviesList(movieName : String, pageNumber: String) {
+ ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
+ (moviesList) in
+ if moviesList.value?.response != "False" {
+ guard let totalResults = moviesList.value?.totalResults else {
+ return
+ }
+ self.totalPages = self.totalPages(totalPages: totalResults)
+ if pageNumber != "" {
+ self.pageNumber += 1
+ guard let search = moviesList.value?.search else {
+ return
+ }
+ for item in search {
+ self.moviesList?.search?.append(item)
+ }
+ } else {
+ self.moviesList = moviesList.value
+ }
+ } else {
+ self.moviesList = nil
+ }
+ self.tableView.reloadData()
+ KRProgressHUD.dismiss()
+ }, failure: (error) in
+ print(error)
+ )
+ }
+ */
     func getMoviesList(movieName : String, pageNumber: String) {
         ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
             (moviesList) in

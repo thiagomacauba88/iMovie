@@ -329,6 +329,7 @@
 				TargetAttributes = {
 					AF1690BC1FAB675F00EBEBAD = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = JLE8SUY4AH;
 						ProvisioningStyle = Automatic;
 					};
 					AF1690D31FAB675F00EBEBAD = {
@@ -724,9 +725,10 @@
 			baseConfigurationReference = 362436E1E04DD770E79D4AC9 /* Pods-iMovies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JLE8SUY4AH;
 				INFOPLIST_FILE = iMovies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.br.iMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -737,9 +739,10 @@
 			baseConfigurationReference = 32F6B1C9F85D6237964B780C /* Pods-iMovies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JLE8SUY4AH;
 				INFOPLIST_FILE = iMovies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.iMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.br.iMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

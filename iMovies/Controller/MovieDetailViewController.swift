@@ -41,7 +41,9 @@ class MovieDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
-        self.getMoviesById(movieId: self.movieId!)
+        if let movieId = self.movieId {
+            self.getMoviesById(movieId: movieId)
+        }
     }
     
     func setRightButton(isWhatched: Bool){
@@ -60,19 +62,26 @@ class MovieDetailViewController: UIViewController {
         self.rightButton?.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         self.rightButton?.widthAnchor.constraint(equalToConstant: 20.0).isActive = true
         self.rightButton?.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
-        let buttonBar = UIBarButtonItem.init(customView: self.rightButton!)
+        guard let rightButton = self.rightButton else {
+            return
+        }
+        let buttonBar = UIBarButtonItem.init(customView: rightButton)
         self.navigationItem.rightBarButtonItem = buttonBar
     }
     
     func watchedButton(sender: UIButton) {
         if sender.tag == 0 {
             self.setRightButton(isWhatched: true)
-            ServiceHelper().saveMovieCoredata(movie: self.movie!)
-            self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId!)
+            if let movie = self.movie, let movieId = self.movieId {
+                ServiceHelper().saveMovieCoredata(movie: movie)
+                self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
+            }
         } else {
             self.setRightButton(isWhatched: false)
-            ServiceHelper().removeMovieCoreData(movieId: (self.movieCoreData?.value(forKey: "imdbID") as? String)!)
-            self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId!)
+            if let imdbID = self.movieCoreData?.value(forKey: "imdbID") as? String, let movieId = self.movieId {
+                ServiceHelper().removeMovieCoreData(movieId: imdbID)
+                self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
+            }
         }
     }
 
@@ -84,7 +93,7 @@ class MovieDetailViewController: UIViewController {
     }
     func setupComponents(movie: MovieDetail) {
     
-        self.titleLabel.text = movie.title!
+        self.titleLabel.text = movie.title
         self.yearLabel.text = movie.year
         self.releasedLabel.text = movie.released
         self.genreLabel.text = movie.genre
@@ -92,8 +101,12 @@ class MovieDetailViewController: UIViewController {
         self.actorsLabel.text = movie.actors
         self.plotTextView.text = movie.plot
         self.runtimeLabel.text = movie.runtime
-        let downloadURL = NSURL(string: (movie.posterImage)!)
-        self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
+        guard let posterImage = movie.posterImage else{
+            return
+        }
+        if let downloadURL = NSURL(string: posterImage) {
+            self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+        }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
     }
     
@@ -107,10 +120,13 @@ class MovieDetailViewController: UIViewController {
         } else {
             ServiceHelper().getMovieById(movieId: movieId, handler: {
                 (movie) in
-                self.setupComponents(movie: movie.value!)
+                guard let movieValue = movie.value else {
+                    return
+                }
+                self.setupComponents(movie: movieValue)
                 self.movie = movie.value
                 self.setRightButton(isWhatched: false)
-                 self.setupComponents(movie: self.movie!)
+                 self.setupComponents(movie: movieValue)
             })
         }
     }
@@ -124,8 +140,13 @@ class MovieDetailViewController: UIViewController {
         self.actorsLabel.text = self.movieCoreData?.value(forKey: "actors") as? String
         self.plotTextView.text = self.movieCoreData?.value(forKey: "plot") as? String
         self.runtimeLabel.text = self.movieCoreData?.value(forKey: "runtime") as? String
-        let downloadURL = NSURL(string: (self.movieCoreData?.value(forKey: "posterImage") as? String)!)
-        self.backgroundImage.af_setImage(withURL: downloadURL! as URL)
+        
+        guard let posterImage = self.movieCoreData?.value(forKey: "posterImage") as? String else{
+            return
+        }
+        if let downloadURL = NSURL(string: posterImage) {
+            self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+        }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
     }
     
