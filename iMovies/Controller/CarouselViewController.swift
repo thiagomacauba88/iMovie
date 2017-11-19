@@ -17,7 +17,7 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var iCarouselView: iCarousel!
     @IBOutlet var titleLabel: UILabel!
-    var moviesCoreData : [NSManagedObject]?
+    var movieEntity : [MovieDetailEntity]?
     var movieSelected : NSManagedObject? = nil
     
     override func viewDidLoad() {
@@ -31,22 +31,24 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     
     func getMovieCoredata () {
         
-        self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        guard let count = self.moviesCoreData?.count else {
+        self.movieEntity = ServiceHelper().getMoviesCoreData()
+        guard let count = self.movieEntity?.count else {
             return
         }
         if count > 0 {
-            self.titleLabel.text = self.moviesCoreData?.first?.value(forKey: "title") as? String
+            self.titleLabel.text = self.movieEntity?.first?.title
             guard let titleLabelText = self.titleLabel.text else {
                 return
             }
             self.titleLabel.text = titleLabelText+" ("
-            guard let firstMovie = self.moviesCoreData?.first?.value(forKey: "year") as? String else {
+            guard let firstMovie = self.movieEntity?.first?.year else {
                 return
             }
-            self.titleLabel.text = self.titleLabel.text!+firstMovie+")"
+            if let titleText = self.titleLabel.text {
+                self.titleLabel.text = titleText+firstMovie+")"
+            }
             self.setBackgroundImage()
-            if let imageUrl = self.moviesCoreData?.first?.value(forKey: "posterImage") as? String {
+            if let imageUrl = self.movieEntity?.first?.posterImage {
                 if let downloadURL = NSURL(string: imageUrl) {
                     self.backgroundImage.af_setImage(withURL: downloadURL as URL)
                 }
@@ -80,10 +82,10 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
-        if self.moviesCoreData == nil {
+        if self.movieEntity == nil {
             return 0
         }
-        if let count = self.moviesCoreData?.count {
+        if let count = self.movieEntity?.count {
             return count
         } else {
             return 0
@@ -91,19 +93,24 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
-        self.movieSelected = self.moviesCoreData?[index]
+        self.movieSelected = self.movieEntity?[index]
         performSegue(withIdentifier: "movieDetailSegue", sender: self)
     }
     
     func carouselDidScroll(_ carousel: iCarousel) {
-        guard let count = self.moviesCoreData?.count else {
+        guard let count = self.movieEntity?.count else {
             return
         }
         if count != 0 {
-            self.titleLabel.text = self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "title") as? String
-            self.titleLabel.text = self.titleLabel.text!+" ("
-            self.titleLabel.text = self.titleLabel.text!+(self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "year")as? String)!+")"
-            guard let imageUrl = self.moviesCoreData?[carousel.currentItemIndex].value(forKey: "posterImage") as? String else {
+            self.titleLabel.text = self.movieEntity?[carousel.currentItemIndex].title
+            if var titleText = self.titleLabel.text, let year = self.movieEntity?[carousel.currentItemIndex].year {
+                titleText = titleText+" ("
+                titleText = titleText+year+")"
+                self.titleLabel.text = titleText
+            }
+            
+            //self.titleLabel.text = self.titleLabel.text!+(self.movieEntity?[carousel.currentItemIndex].year)!+")"
+            guard let imageUrl = self.movieEntity?[carousel.currentItemIndex].posterImage else {
                 return
             }
             if let downloadURL = NSURL(string: imageUrl) {
@@ -113,7 +120,7 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        let imageUrl = self.moviesCoreData?[index].value(forKey: "posterImage") as? String
+        let imageUrl = self.movieEntity?[index].posterImage
         let tempView = UIView(frame: CGRect(x:0, y:0, width: self.iCarouselView.frame.width, height: self.iCarouselView.frame.height))
         tempView.backgroundColor = UIColor.clear
         let frame = CGRect(x:0, y:0, width: self.iCarouselView.frame.width, height: self.iCarouselView.frame.height)

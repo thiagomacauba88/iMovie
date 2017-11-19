@@ -60,14 +60,17 @@ class ServiceHelper: NSObject {
         }
     }
     
-    func getMoviesCoreData() -> [NSManagedObject]{
+    func getMoviesCoreData() -> [MovieDetailEntity]{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDetailEntity")
         request.returnsObjectsAsFaults = false
         var resultsContext : [NSManagedObject]? = nil
         let context = appDelegate.persistentContainer.viewContext
+        var movieDetailEntity: [MovieDetailEntity]? = nil
         do{
             resultsContext = try context.fetch(request) as? [NSManagedObject]
+            
+            movieDetailEntity =  resultsContext as? [MovieDetailEntity]
 //            if (resultsContext?.count)! > 0{
 //                for result in resultsContext!{
 //                    //                    if let userName = result.value(forKey: "name") as? String{
@@ -76,14 +79,14 @@ class ServiceHelper: NSObject {
 //                    //                    }
 //                }
 //            }
-            return resultsContext!
+            return movieDetailEntity!
         }
         catch{
-            return resultsContext!
+            return movieDetailEntity!
         }
     }
     
-    func getMovieById(uid : String) -> [NSManagedObject]{
+    func getMovieById(uid : String) -> [MovieDetailEntity]{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDetailEntity")
         //var movie: MovieDetail?
@@ -91,14 +94,15 @@ class ServiceHelper: NSObject {
         request.returnsObjectsAsFaults = false
         var resultsContext : [NSManagedObject]? = nil
         let context = appDelegate.persistentContainer.viewContext
-        
+        var movieDetailEntity: [MovieDetailEntity]? = nil
         do{
             resultsContext = try context.fetch(request) as? [NSManagedObject]
+            movieDetailEntity =  resultsContext as? [MovieDetailEntity]
             //movie = resultsContext?.first as? MovieDetail
-            return resultsContext!
+            return movieDetailEntity!
         }
         catch{
-            return resultsContext!
+            return movieDetailEntity!
         }
     }
 

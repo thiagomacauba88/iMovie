@@ -31,7 +31,7 @@ class MovieDetailViewController: UIViewController {
     var movie : MovieDetail?
     var movieDetail : MovieDetail?
     var movieCoreData : NSManagedObject?
-    var moviesCoreData : [NSManagedObject]?
+    var movieEntity : [MovieDetailEntity]?
     var rightButton: UIButton?
     
     override func viewDidLoad() {
@@ -74,13 +74,13 @@ class MovieDetailViewController: UIViewController {
             self.setRightButton(isWhatched: true)
             if let movie = self.movie, let movieId = self.movieId {
                 ServiceHelper().saveMovieCoredata(movie: movie)
-                self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
+                self.movieEntity = ServiceHelper().getMovieById(uid: movieId)
             }
         } else {
             self.setRightButton(isWhatched: false)
-            if let imdbID = self.movieCoreData?.value(forKey: "imdbID") as? String, let movieId = self.movieId {
+            if let imdbID = self.movieEntity?.first?.imdbID, let movieId = self.movieId {
                 ServiceHelper().removeMovieCoreData(movieId: imdbID)
-                self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
+                self.movieEntity = ServiceHelper().getMovieById(uid: movieId)
             }
         }
     }
@@ -112,9 +112,8 @@ class MovieDetailViewController: UIViewController {
     
     func getMoviesById(movieId : String) {
         
-        self.moviesCoreData = ServiceHelper().getMovieById(uid: movieId)
-        if self.moviesCoreData?.count != 0 {
-            self.movieCoreData = self.moviesCoreData?.first
+        self.movieEntity = ServiceHelper().getMovieById(uid: movieId)
+        if self.movieEntity?.count != 0 {
             self.fillModelByCoreData()
             self.setRightButton(isWhatched: true)
         } else {
@@ -132,16 +131,16 @@ class MovieDetailViewController: UIViewController {
     }
     
     func fillModelByCoreData(){
-        self.titleLabel.text = self.movieCoreData?.value(forKey: "title") as? String
-        self.yearLabel.text = self.movieCoreData?.value(forKey: "year") as? String
-        self.releasedLabel.text = self.movieCoreData?.value(forKey: "released") as? String
-        self.genreLabel.text = self.movieCoreData?.value(forKey: "genre") as? String
-        self.directorLabel.text = self.movieCoreData?.value(forKey: "director") as? String
-        self.actorsLabel.text = self.movieCoreData?.value(forKey: "actors") as? String
-        self.plotTextView.text = self.movieCoreData?.value(forKey: "plot") as? String
-        self.runtimeLabel.text = self.movieCoreData?.value(forKey: "runtime") as? String
+        self.titleLabel.text = self.movieEntity?.first?.title
+        self.yearLabel.text = self.movieEntity?.first?.year
+        self.releasedLabel.text = self.movieEntity?.first?.released
+        self.genreLabel.text = self.movieEntity?.first?.genre
+        self.directorLabel.text = self.movieEntity?.first?.director
+        self.actorsLabel.text = self.movieEntity?.first?.actors
+        self.plotTextView.text = self.movieEntity?.first?.plot
+        self.runtimeLabel.text = self.movieEntity?.first?.runtime
         
-        guard let posterImage = self.movieCoreData?.value(forKey: "posterImage") as? String else{
+        guard let posterImage = self.movieEntity?.first?.posterImage else{
             return
         }
         if let downloadURL = NSURL(string: posterImage) {

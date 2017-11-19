@@ -27,7 +27,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     var totalPages : Int = 0
     var searchBar : UISearchBar?
     var movieSelectedId : String?
-    var moviesCoreData : [NSManagedObject]?
+    var movieEntity : [MovieDetailEntity]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        guard let moviesCount = self.moviesCoreData?.count else {
+        self.movieEntity = ServiceHelper().getMoviesCoreData()
+        guard let moviesCount = self.movieEntity?.count else {
             return
         }
         if moviesCount > 0 {
@@ -67,8 +67,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     }
     
     func showAddedButton() {
-        self.moviesCoreData = ServiceHelper().getMoviesCoreData()
-        guard let moviesCount = self.moviesCoreData?.count else {
+        self.movieEntity = ServiceHelper().getMoviesCoreData()
+        guard let moviesCount = self.movieEntity?.count else {
             return
         }
         if moviesCount == 0 {
@@ -170,6 +170,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
                 } else {
                     self.moviesList = moviesList.value
                 }
+                KRProgressHUD.dismiss()
             } else {
                 self.moviesList = nil
             }
@@ -230,6 +231,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
             return
         }
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : font,NSForegroundColorAttributeName : UIColor.white], for: .normal)
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        self.searchBar?.barStyle = UIBarStyle.blackOpaque
+        
+
         self.searchBar?.placeholder = "Tap a movie name"
         self.searchBar?.delegate = self
         self.navigationItem.titleView = searchBar
@@ -245,7 +250,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.tableView.isHidden = true
         self.notFoundMovieView.isHidden = true
         self.containerView.isHidden = false
-        if self.moviesCoreData?.count == 0 {
+        if self.movieEntity?.count == 0 {
             self.addButton.isHidden = false
             self.clickMovieLabel.isHidden = false
         }
