@@ -14,7 +14,6 @@ import AlamofireImage
 
 class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselDataSource {
 
-    
     @IBOutlet var genreDurationLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var iCarouselView: iCarousel!
@@ -32,7 +31,6 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func getMovieCoredata () {
-        
         self.movieEntity = ServiceHelper().getMoviesCoreData()
         guard let count = self.movieEntity?.count else {
             return
@@ -66,7 +64,6 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
         } else {
             self.titleLabel.text = ""
             self.genreDurationLabel.text = ""
-            //self.backgroundImage.removeFromSuperview()
             self.setGradientView()
         }
         iCarouselView.reloadData()
@@ -75,12 +72,13 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     }
     
     func setGradientView() {
+        self.backgroundImage.image = nil
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        //gradient.colors = [UIColor.black.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor, UIColor.lightGray.cgColor, UIColor.white.cgColor]
+        gradient.colors = []
         gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
         view.layer.insertSublayer(gradient, at: 0)
-        self.backgroundImage.image = nil
+        
     }
     
     func setBackgroundImage() {
@@ -123,8 +121,6 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
                 genreDuration = genreDuration+" - "+runtime
                 self.genreDurationLabel.text = genreDuration
             }
-            
-            //self.titleLabel.text = self.titleLabel.text!+(self.movieEntity?[carousel.currentItemIndex].year)!+")"
             guard let imageUrl = self.movieEntity?[carousel.currentItemIndex].posterImage else {
                 return
             }

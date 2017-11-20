@@ -135,6 +135,7 @@
                                     <constraint firstAttribute="height" constant="251" id="jUD-ro-xr9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="140"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="-27" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="+">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -205,11 +206,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bK6-Qa-gZh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5Tp-32-7yi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tap-Qp-BrN">
-                                <rect key="frame" x="0.0" y="-48" width="375" height="898"/>
+                                <rect key="frame" x="0.0" y="-68" width="375" height="854"/>
                                 <subviews>
                                     <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.64999997615814209" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yr0-a0-Ycd">
                                         <rect key="frame" x="0.0" y="-66" width="375" height="471"/>
@@ -443,19 +444,15 @@
                                         <color key="textColor" red="0.44159090519999999" green="0.45520037410000003" blue="0.50356507299999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTC-6m-qRa">
-                                        <rect key="frame" x="148" y="293" width="210" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTC-6m-qRa">
+                                        <rect key="frame" x="148" y="248" width="210" height="69"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                         <color key="textColor" red="0.60941249132156372" green="0.64718168973922729" blue="0.7078893780708313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No image Available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YA7-sq-M2j">
-                                        <rect key="frame" x="17" y="291" width="121" height="91"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="121" id="IwY-1C-k7X"/>
-                                            <constraint firstAttribute="height" constant="91" id="yr3-xS-8U4"/>
-                                        </constraints>
+                                        <rect key="frame" x="17" y="311" width="123" height="45.5"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -472,15 +469,16 @@
                                     <constraint firstAttribute="trailing" secondItem="Iza-jT-rcZ" secondAttribute="trailing" constant="17" id="IrY-j8-BMK"/>
                                     <constraint firstItem="Yr0-a0-Ycd" firstAttribute="leading" secondItem="PaX-hm-spQ" secondAttribute="leading" id="Pnp-qe-Ws8"/>
                                     <constraint firstAttribute="bottom" secondItem="PaX-hm-spQ" secondAttribute="bottom" id="Shw-rc-qJZ"/>
-                                    <constraint firstItem="ZTC-6m-qRa" firstAttribute="top" secondItem="tap-Qp-BrN" secondAttribute="top" constant="293" id="aVH-In-row"/>
+                                    <constraint firstItem="ZTC-6m-qRa" firstAttribute="top" secondItem="tap-Qp-BrN" secondAttribute="top" constant="248" id="aVH-In-row"/>
+                                    <constraint firstItem="YA7-sq-M2j" firstAttribute="leading" secondItem="tap-Qp-BrN" secondAttribute="leading" constant="17" id="avA-je-K0Q"/>
                                     <constraint firstItem="PaX-hm-spQ" firstAttribute="top" secondItem="Iza-jT-rcZ" secondAttribute="bottom" constant="16" id="gyW-TK-N0X"/>
+                                    <constraint firstItem="YA7-sq-M2j" firstAttribute="top" secondItem="e0x-aN-xO5" secondAttribute="bottom" constant="122" id="iPj-Tu-fhT"/>
                                     <constraint firstAttribute="trailing" secondItem="Yr0-a0-Ycd" secondAttribute="trailing" id="lH5-U6-8vd"/>
                                     <constraint firstAttribute="trailing" secondItem="e0x-aN-xO5" secondAttribute="trailing" constant="16" id="oLQ-ms-Xfq"/>
                                     <constraint firstItem="ZTC-6m-qRa" firstAttribute="leading" secondItem="obk-co-BeC" secondAttribute="trailing" constant="10" id="p2i-8K-yi8"/>
                                     <constraint firstItem="Yr0-a0-Ycd" firstAttribute="centerX" secondItem="tap-Qp-BrN" secondAttribute="centerX" id="paL-6h-L4v"/>
-                                    <constraint firstItem="YA7-sq-M2j" firstAttribute="leading" secondItem="tap-Qp-BrN" secondAttribute="leading" constant="17" id="qKf-kB-eaQ"/>
-                                    <constraint firstItem="YA7-sq-M2j" firstAttribute="top" secondItem="e0x-aN-xO5" secondAttribute="bottom" constant="102" id="r6f-In-f3A"/>
                                     <constraint firstAttribute="trailing" secondItem="ZTC-6m-qRa" secondAttribute="trailing" constant="17" id="st0-rD-PTd"/>
+                                    <constraint firstItem="ZTC-6m-qRa" firstAttribute="leading" secondItem="YA7-sq-M2j" secondAttribute="trailing" constant="8" id="xcb-q4-0OO"/>
                                     <constraint firstItem="Yr0-a0-Ycd" firstAttribute="leading" secondItem="tap-Qp-BrN" secondAttribute="leading" id="ydN-hf-Kle"/>
                                 </constraints>
                             </scrollView>
@@ -516,7 +514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGn-Ca-8hD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388" y="1357.4212893553224"/>
+            <point key="canvasLocation" x="2386.4000000000001" y="1356.521739130435"/>
         </scene>
         <!--Data Source-->
         <scene sceneID="aK3-NK-DOD">
@@ -614,6 +612,6 @@
         <image name="noMovies" width="320" height="320"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sWY-Bc-kKS"/>
+        <segue reference="cez-lA-Awm"/>
     </inferredMetricsTieBreakers>
 </document>

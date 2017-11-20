@@ -83,21 +83,12 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     func setGradientView() {
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        //7 54 67
-        gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]//
-        //gradient.colors = [UIColor.black.cgColor,UIColor.black.cgColor,UIColor.darkGray.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor,UIColor.gray.cgColor, UIColor.lightGray.cgColor,UIColor.lightGray.cgColor]
+        gradient.colors = []
+        gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
         view.layer.insertSublayer(gradient, at: 0)
     }
+    
     func totalPages(totalPages : String) -> Int {
-//        let totalResultsInt = Int(totalPages)
-//
-//            self.totalPages = Int(totalPages)!-Int(totalPages)!%10
-//            self.totalPages = self.totalPages!/10
-//            if totalResultsInt!%10 != 0{
-//                self.totalPages? += 1
-//            }
-//            return self.totalPages!
-        
         if let totalResultsInt = Int(totalPages) {
         
             self.totalPages = totalResultsInt-totalResultsInt%10
@@ -108,7 +99,6 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
             }
         }
         return self.totalPages
-
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -121,38 +111,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
             self.getMoviesList(movieName: searchTxt, pageNumber: "")
         }
         self.tableView.reloadData()
-        self.setGradientView()
     }
-    /*
- func getMoviesList(movieName : String, pageNumber: String) {
- ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
- (moviesList) in
- if moviesList.value?.response != "False" {
- guard let totalResults = moviesList.value?.totalResults else {
- return
- }
- self.totalPages = self.totalPages(totalPages: totalResults)
- if pageNumber != "" {
- self.pageNumber += 1
- guard let search = moviesList.value?.search else {
- return
- }
- for item in search {
- self.moviesList?.search?.append(item)
- }
- } else {
- self.moviesList = moviesList.value
- }
- } else {
- self.moviesList = nil
- }
- self.tableView.reloadData()
- KRProgressHUD.dismiss()
- }, failure: (error) in
- print(error)
- )
- }
- */
+
     func getMoviesList(movieName : String, pageNumber: String) {
         ServiceHelper().getMovies(movieName: movieName, pageNumber: pageNumber, handler: {
             (moviesList) in
@@ -205,8 +165,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.title = "iMovie"
-        self.navigationItem.title = "iMovie"
+        self.title = "iMovies"
+        self.navigationItem.title = "iMovies"
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [String : Any]
         self.rightButton = UIButton.init(type: .custom)
@@ -237,14 +197,8 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         }
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : font,NSForegroundColorAttributeName : UIColor.white], for: .normal)
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-
         self.searchBar?.barStyle = UIBarStyle.blackOpaque
-        
-
         self.searchBar?.placeholder = "Tap a movie name"
-        
-        
-
         self.searchBar?.delegate = self
         self.navigationItem.titleView = searchBar
         self.searchBar?.setShowsCancelButton(true, animated: true)
@@ -344,4 +298,3 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         performSegue(withIdentifier: "movieDetailSegue", sender: self)
     }
 }
-

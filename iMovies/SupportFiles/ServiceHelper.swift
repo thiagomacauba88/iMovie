@@ -14,25 +14,7 @@ class ServiceHelper: NSObject {
 
     var movieDetail : MovieDetail?
     let baseuUrl = "http://www.omdbapi.com/?apikey=dcdc9b0&"
-    
-    
-    /*
- //DataResponse<Movies>
- func getMovies(movieName: String, pageNumber: String, success: @escaping (DataResponse<Movies>) -> Void,
- failure: @escaping (Error) -> Void){
- var url = baseuUrl + "s="+movieName
- if pageNumber != "" {
- url = url+"&page="+pageNumber
- }
- Alamofire.request(url).responseObject { (response: DataResponse<Movies>) in
- switch response.result {
- case .success:
- success(response)
- case .failure:
- failure(response.result.error!)
- }
- }
- }*/
+
     func getMovies(movieName: String, pageNumber: String, handler: @escaping (_ msg: DataResponse<Movies>) -> ()){
         var url = baseuUrl + "s="+movieName
         if pageNumber != "" {
@@ -69,16 +51,7 @@ class ServiceHelper: NSObject {
         var movieDetailEntity: [MovieDetailEntity]? = nil
         do{
             resultsContext = try context.fetch(request) as? [NSManagedObject]
-            
             movieDetailEntity =  resultsContext as? [MovieDetailEntity]
-//            if (resultsContext?.count)! > 0{
-//                for result in resultsContext!{
-//                    //                    if let userName = result.value(forKey: "name") as? String{
-//                    //                        print(userName)
-//                    //
-//                    //                    }
-//                }
-//            }
             return movieDetailEntity!
         }
         catch{
@@ -89,7 +62,6 @@ class ServiceHelper: NSObject {
     func getMovieById(uid : String) -> [MovieDetailEntity]{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDetailEntity")
-        //var movie: MovieDetail?
         request.predicate = NSPredicate(format: "imdbID = %@", uid)
         request.returnsObjectsAsFaults = false
         var resultsContext : [NSManagedObject]? = nil
@@ -98,7 +70,6 @@ class ServiceHelper: NSObject {
         do{
             resultsContext = try context.fetch(request) as? [NSManagedObject]
             movieDetailEntity =  resultsContext as? [MovieDetailEntity]
-            //movie = resultsContext?.first as? MovieDetail
             return movieDetailEntity!
         }
         catch{

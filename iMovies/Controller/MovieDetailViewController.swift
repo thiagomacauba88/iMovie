@@ -15,7 +15,6 @@ import ObjectMapper
 
 class MovieDetailViewController: UIViewController {
 
-    
     @IBOutlet var noImageLittle: UILabel!
     @IBOutlet var noImageLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
@@ -23,7 +22,6 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var movieImage: UIImageView!
-    @IBOutlet var teste: UILabel!
     @IBOutlet var runtimeLabel: UILabel!
     @IBOutlet var imbdRating: UILabel!
     @IBOutlet var plotTextView: UITextView!
@@ -32,12 +30,10 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet var genreLabel: UILabel!
     @IBOutlet var writerLabel: UILabel!
     @IBOutlet var awardsLabel: UILabel!
-    @IBOutlet var imageView: UIImageView!
     @IBOutlet var releasedLabel: UILabel!
-    
+    @IBOutlet var typeLabel: UILabel!
     var movieId : String?
     var movie : MovieDetail?
-    @IBOutlet var typeLabel: UILabel!
     var movieDetail : MovieDetail?
     var movieCoreData : NSManagedObject?
     var movieEntity : [MovieDetailEntity]?
@@ -45,7 +41,6 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -95,22 +90,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
 
-    func setBackgroundImage() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.frame = self.backgroundImage.bounds
-        self.backgroundImage.addSubview(blurView)
-    }
     func setupComponents(movie: MovieDetail) {
-    
-        //self.title = self.movie?.title
-        /*  
-        
-        //self.titleLabel.text = movie.title
-        
-        
-        
-        */
         self.titleLabel.text = movie.title
         self.awardsLabel.text = movie.awards
         self.writerLabel.text = movie.writer
@@ -133,7 +113,6 @@ class MovieDetailViewController: UIViewController {
             } else{
                 self.backgroundImage.af_setImage(withURL: downloadURL as URL)
                 self.movieImage.af_setImage(withURL: downloadURL as URL)
-                
             }
             self.imbdRating.text =  imdbRating+" IMDB"
         }
@@ -161,15 +140,7 @@ class MovieDetailViewController: UIViewController {
     }
 
     func fillModelByCoreData(){
-        /*
-        
-        //self.titleLabel.text = self.movieEntity?.first?.title
-        
-        
-        
-        */
         self.titleLabel.text = self.movieEntity?.first?.title
-        //self.title = self.movieEntity?.first?.title
         self.awardsLabel.text = self.movieEntity?.first?.awards
         self.writerLabel.text = self.movieEntity?.first?.writer
         self.releasedLabel.text = self.movieEntity?.first?.released
