@@ -14,6 +14,7 @@ import AlamofireImage
 
 class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselDataSource {
 
+    
     @IBOutlet var genreDurationLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var iCarouselView: iCarousel!
@@ -53,8 +54,12 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
             }
             self.setBackgroundImage()
             if let imageUrl = self.movieEntity?.first?.posterImage {
-                if let downloadURL = NSURL(string: imageUrl) {
-                    self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+                if imageUrl == "N/A" {
+                    self.backgroundImage.image = #imageLiteral(resourceName: "noImageCarousel")
+                } else {
+                    if let downloadURL = NSURL(string: imageUrl) {
+                        self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+                    }
                 }
             }
             self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
@@ -111,10 +116,12 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
         }
         if count != 0 {
             self.titleLabel.text = self.movieEntity?[carousel.currentItemIndex].title
-            if var titleText = self.titleLabel.text, let year = self.movieEntity?[carousel.currentItemIndex].year {
+            if var titleText = self.titleLabel.text, let year = self.movieEntity?[carousel.currentItemIndex].year, var genreDuration = self.movieEntity?[carousel.currentItemIndex].genre, let runtime = self.movieEntity?[carousel.currentItemIndex].runtime {
                 titleText = titleText+" ("
                 titleText = titleText+year+")"
                 self.titleLabel.text = titleText
+                genreDuration = genreDuration+" - "+runtime
+                self.genreDurationLabel.text = genreDuration
             }
             
             //self.titleLabel.text = self.titleLabel.text!+(self.movieEntity?[carousel.currentItemIndex].year)!+")"
@@ -137,10 +144,14 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
         imageView.frame = frame
         imageView.backgroundColor = UIColor.clear
         imageView.contentMode = .scaleAspectFit
-        if let image = imageUrl {
-            let downloadURL = NSURL(string: image)
-            if let url = downloadURL {
-                imageView.af_setImage(withURL: url as URL)
+        if imageUrl == "N/A" {
+            imageView.image = #imageLiteral(resourceName: "noImageCarousel")
+        } else {
+            if let image = imageUrl {
+                let downloadURL = NSURL(string: image)
+                if let url = downloadURL {
+                    imageView.af_setImage(withURL: url as URL)
+                }
             }
         }
         tempView.addSubview(imageView)

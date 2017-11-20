@@ -327,8 +327,12 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         let titleLabel = cell.contentView.viewWithTag(2) as! UILabel
         if let title = item?.title, let year = item?.year, let image = item?.posterImage {
             titleLabel.text = title+" ("+year+")"
-            if let downloadURL = NSURL(string: image) {
-                imageView.af_setImage(withURL: downloadURL as URL)
+            if image == "N/A" {
+                imageView.image = #imageLiteral(resourceName: "noImage")
+            } else {
+                if let downloadURL = NSURL(string: image) {
+                    imageView.af_setImage(withURL: downloadURL as URL)
+                }
             }
         }
         return cell

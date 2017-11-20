@@ -7,12 +7,10 @@ target 'iMovies' do
 
   # Pods for iMovies
   pod 'Alamofire'
-  pod 'AlamofireObjectMapper', '~> 4.0'
+  pod 'AlamofireObjectMapper'
   pod 'AlamofireImage'
   pod 'KRProgressHUD'
-  pod 'Toast-Swift', '~> 2.0'
   pod 'iCarousel'
-
 
   target 'iMoviesTests' do
     inherit! :search_paths

@@ -15,6 +15,9 @@ import ObjectMapper
 
 class MovieDetailViewController: UIViewController {
 
+    
+    @IBOutlet var noImageLittle: UILabel!
+    @IBOutlet var noImageLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
@@ -123,8 +126,15 @@ class MovieDetailViewController: UIViewController {
             return
         }
         if let downloadURL = NSURL(string: posterImage), let imdbRating = movie.imdbRating {
-            self.backgroundImage.af_setImage(withURL: downloadURL as URL)
-            self.movieImage.af_setImage(withURL: downloadURL as URL)
+            if posterImage == "N/A" {
+                //self.movieImage.image = #imageLiteral(resourceName: "noImage")
+                self.noImageLabel.isHidden = false
+                self.noImageLittle.isHidden = false
+            } else{
+                self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+                self.movieImage.af_setImage(withURL: downloadURL as URL)
+                
+            }
             self.imbdRating.text =  imdbRating+" IMDB"
         }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
@@ -149,7 +159,7 @@ class MovieDetailViewController: UIViewController {
             })
         }
     }
-    
+
     func fillModelByCoreData(){
         /*
         
@@ -176,8 +186,14 @@ class MovieDetailViewController: UIViewController {
             return
         }
         if let downloadURL = NSURL(string: posterImage), let imdbRating = self.movieEntity?.first?.imdbRating {
-            self.backgroundImage.af_setImage(withURL: downloadURL as URL)
-            self.movieImage.af_setImage(withURL: downloadURL as URL)
+            if posterImage == "N/A" {
+                self.noImageLabel.isHidden = false
+                self.noImageLittle.isHidden = false
+                
+            } else{
+                self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+                self.movieImage.af_setImage(withURL: downloadURL as URL)
+            }
             self.imbdRating.text =  imdbRating+" IMDB"
         }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
