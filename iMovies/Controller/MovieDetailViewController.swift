@@ -15,20 +15,26 @@ import ObjectMapper
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
+    @IBOutlet var movieImage: UIImageView!
     @IBOutlet var teste: UILabel!
     @IBOutlet var runtimeLabel: UILabel!
+    @IBOutlet var imbdRating: UILabel!
     @IBOutlet var plotTextView: UITextView!
     @IBOutlet var actorsLabel: UILabel!
     @IBOutlet var directorLabel: UILabel!
     @IBOutlet var genreLabel: UILabel!
+    @IBOutlet var writerLabel: UILabel!
+    @IBOutlet var awardsLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var releasedLabel: UILabel!
     
     var movieId : String?
     var movie : MovieDetail?
+    @IBOutlet var typeLabel: UILabel!
     var movieDetail : MovieDetail?
     var movieCoreData : NSManagedObject?
     var movieEntity : [MovieDetailEntity]?
@@ -36,6 +42,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -86,26 +93,39 @@ class MovieDetailViewController: UIViewController {
     }
 
     func setBackgroundImage() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.backgroundImage.bounds
         self.backgroundImage.addSubview(blurView)
     }
     func setupComponents(movie: MovieDetail) {
     
+        //self.title = self.movie?.title
+        /*  
+        
+        //self.titleLabel.text = movie.title
+        
+        
+        
+        */
         self.titleLabel.text = movie.title
-        self.yearLabel.text = movie.year
+        self.awardsLabel.text = movie.awards
+        self.writerLabel.text = movie.writer
         self.releasedLabel.text = movie.released
         self.genreLabel.text = movie.genre
         self.directorLabel.text = movie.director
         self.actorsLabel.text = movie.actors
         self.plotTextView.text = movie.plot
+        self.yearLabel.text = movie.year
         self.runtimeLabel.text = movie.runtime
+        self.typeLabel.text = movie.type
         guard let posterImage = movie.posterImage else{
             return
         }
-        if let downloadURL = NSURL(string: posterImage) {
+        if let downloadURL = NSURL(string: posterImage), let imdbRating = movie.imdbRating {
             self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+            self.movieImage.af_setImage(withURL: downloadURL as URL)
+            self.imbdRating.text =  imdbRating+" IMDB"
         }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
     }
@@ -131,20 +151,34 @@ class MovieDetailViewController: UIViewController {
     }
     
     func fillModelByCoreData(){
+        /*
+        
+        //self.titleLabel.text = self.movieEntity?.first?.title
+        
+        
+        
+        */
         self.titleLabel.text = self.movieEntity?.first?.title
-        self.yearLabel.text = self.movieEntity?.first?.year
+        //self.title = self.movieEntity?.first?.title
+        self.awardsLabel.text = self.movieEntity?.first?.awards
+        self.writerLabel.text = self.movieEntity?.first?.writer
         self.releasedLabel.text = self.movieEntity?.first?.released
         self.genreLabel.text = self.movieEntity?.first?.genre
         self.directorLabel.text = self.movieEntity?.first?.director
         self.actorsLabel.text = self.movieEntity?.first?.actors
+        self.typeLabel.text = self.movieEntity?.first?.type
         self.plotTextView.text = self.movieEntity?.first?.plot
+        self.imbdRating.text =  self.movieEntity?.first?.imdbRating
+        self.yearLabel.text = self.movieEntity?.first?.year
         self.runtimeLabel.text = self.movieEntity?.first?.runtime
         
         guard let posterImage = self.movieEntity?.first?.posterImage else{
             return
         }
-        if let downloadURL = NSURL(string: posterImage) {
+        if let downloadURL = NSURL(string: posterImage), let imdbRating = self.movieEntity?.first?.imdbRating {
             self.backgroundImage.af_setImage(withURL: downloadURL as URL)
+            self.movieImage.af_setImage(withURL: downloadURL as URL)
+            self.imbdRating.text =  imdbRating+" IMDB"
         }
         self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
     }

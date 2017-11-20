@@ -14,6 +14,7 @@ import AlamofireImage
 
 class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselDataSource {
 
+    @IBOutlet var genreDurationLabel: UILabel!
     @IBOutlet var backgroundImage: UIImageView!
     @IBOutlet var iCarouselView: iCarousel!
     @IBOutlet var titleLabel: UILabel!
@@ -36,6 +37,9 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
             return
         }
         if count > 0 {
+            if let genre = self.movieEntity?.first?.genre, let runtime = self.movieEntity?.first?.runtime {
+                self.genreDurationLabel.text = genre+" - "+runtime
+            }
             self.titleLabel.text = self.movieEntity?.first?.title
             guard let titleLabelText = self.titleLabel.text else {
                 return
@@ -56,6 +60,8 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
             self.backgroundImage.addBlackGradientLayer(frame: view.bounds, colors:[.clear, .black])
         } else {
             self.titleLabel.text = ""
+            self.genreDurationLabel.text = ""
+            //self.backgroundImage.removeFromSuperview()
             self.setGradientView()
         }
         iCarouselView.reloadData()
@@ -66,8 +72,10 @@ class CarouselViewController: UIViewController, iCarouselDelegate, iCarouselData
     func setGradientView() {
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.black.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor, UIColor.lightGray.cgColor, UIColor.white.cgColor]
+        //gradient.colors = [UIColor.black.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor, UIColor.lightGray.cgColor, UIColor.white.cgColor]
+        gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
         view.layer.insertSublayer(gradient, at: 0)
+        self.backgroundImage.image = nil
     }
     
     func setBackgroundImage() {

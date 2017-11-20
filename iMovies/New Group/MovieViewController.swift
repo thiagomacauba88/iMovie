@@ -83,7 +83,9 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     func setGradientView() {
         let gradient = CAGradientLayer()
         gradient.frame = self.view.bounds
-        gradient.colors = [UIColor.black.cgColor,UIColor.black.cgColor,UIColor.darkGray.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor,UIColor.gray.cgColor, UIColor.lightGray.cgColor,UIColor.lightGray.cgColor]
+        //7 54 67
+        gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]//
+        //gradient.colors = [UIColor.black.cgColor,UIColor.black.cgColor,UIColor.darkGray.cgColor,UIColor.darkGray.cgColor, UIColor.gray.cgColor,UIColor.gray.cgColor, UIColor.lightGray.cgColor,UIColor.lightGray.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
     }
     func totalPages(totalPages : String) -> Int {
@@ -114,7 +116,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         self.containerView.isHidden = true
         self.addButton.isHidden = true
         self.clickMovieLabel.isHidden = true
-        let searchText = searchBar.text?.replacingOccurrences(of: " ", with: "")
+        let searchText = searchBar.text?.replacingOccurrences(of: " ", with: "+")
         if let searchTxt = searchText {
             self.getMoviesList(movieName: searchTxt, pageNumber: "")
         }
@@ -183,7 +185,10 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         if (self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height)) {
             KRProgressHUD.show()
             if self.pageNumber <= self.totalPages {
-                self.getMoviesList(movieName: "back", pageNumber: self.pageNumber.description)
+                let searchText = self.searchBar?.text?.replacingOccurrences(of: " ", with: "+")
+                if let searchTxt = searchText {
+                    self.getMoviesList(movieName: searchTxt, pageNumber: self.pageNumber.description)
+                }
             }
         }
     }
@@ -232,10 +237,14 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
         }
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : font,NSForegroundColorAttributeName : UIColor.white], for: .normal)
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+
         self.searchBar?.barStyle = UIBarStyle.blackOpaque
         
 
         self.searchBar?.placeholder = "Tap a movie name"
+        
+        
+
         self.searchBar?.delegate = self
         self.navigationItem.titleView = searchBar
         self.searchBar?.setShowsCancelButton(true, animated: true)

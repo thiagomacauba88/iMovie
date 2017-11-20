@@ -22,6 +22,10 @@ class MovieDetail: Mappable {
     var runtime : String?
     var posterImage : String?
     var imdbID : String?
+    var imdbRating : String?
+    var type : String?
+    var writer : String?
+    var awards: String?
     
     required init?(map: Map){
     }
@@ -37,5 +41,9 @@ class MovieDetail: Mappable {
         runtime <- map["Runtime"]
         posterImage <- map["Poster"]
         imdbID <- map["imdbID"]
+        imdbRating <- map["imdbRating"]
+        type <- map["Type"]
+        writer <- map["Writer"]
+        awards <- map["Awards"]
     }
 }

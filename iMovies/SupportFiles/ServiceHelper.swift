@@ -133,6 +133,10 @@ class ServiceHelper: NSObject {
         movieCoreData.setValue(movie.runtime, forKey: "runtime")
         movieCoreData.setValue(movie.title, forKey: "title")
         movieCoreData.setValue(movie.year, forKey: "year")
+        movieCoreData.setValue(movie.imdbRating, forKey: "imdbRating")
+        movieCoreData.setValue(movie.type, forKey: "Type")
+        movieCoreData.setValue(movie.writer, forKey: "Writer")
+        movieCoreData.setValue(movie.awards, forKey: "Awards")
         do{
             try context.save()
         }
