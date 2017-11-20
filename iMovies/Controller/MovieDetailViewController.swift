@@ -15,6 +15,7 @@ import ObjectMapper
 
 class MovieDetailViewController: UIViewController {
 
+    @IBOutlet var detailView: UIView!
     @IBOutlet var noImageLittle: UILabel!
     @IBOutlet var noImageLabel: UILabel!
     @IBOutlet var scrollView: UIScrollView!
@@ -41,6 +42,7 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setGradient()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
@@ -51,6 +53,13 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    func setGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = self.detailView.bounds
+        gradient.colors = []
+        gradient.colors = [UIColor(red: 2, green: 43, blue: 54, alpha: 1),UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
+        self.detailView.layer.insertSublayer(gradient, at: 0)
+    }
     func setRightButton(isWhatched: Bool){
         self.rightButton = UIButton.init(type: .custom)
         self.rightButton?.titleLabel?.textAlignment = .right

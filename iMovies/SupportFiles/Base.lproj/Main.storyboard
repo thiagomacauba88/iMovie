@@ -237,7 +237,7 @@
                                                 <color key="textColor" red="0.4809269905090332" green="0.49437946081161499" blue="0.53872889280319214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesse Eisenberg, Rooney Mara, Bryan Barter, Dustin Fitzsimons" lineBreakMode="headTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="4en-Zt-9dd">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jesse Eisenberg, Rooney Mara, Bryan Barter, Dustin Fitzsimons" lineBreakMode="headTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="4en-Zt-9dd">
                                                 <rect key="frame" x="17" y="257" width="341" height="35"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -344,11 +344,11 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Jun 1980" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6r-OA-Lt2">
-                                                <rect key="frame" x="17" y="380" width="341" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Jun 1980" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Z6r-OA-Lt2">
+                                                <rect key="frame" x="17" y="371" width="341" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="15" id="xLK-Yf-ldU"/>
+                                                    <constraint firstAttribute="height" constant="40" id="xLK-Yf-ldU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="14"/>
                                                 <color key="textColor" red="0.38267135619999998" green="0.40025091169999999" blue="0.44865787029999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -364,7 +364,7 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Jun 1980" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYO-nn-Z1C">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 Jun 1980" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="vYO-nn-Z1C">
                                                 <rect key="frame" x="17" y="434" width="341" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -400,11 +400,11 @@
                                             <constraint firstItem="uME-cy-IwV" firstAttribute="leading" secondItem="PaX-hm-spQ" secondAttribute="leading" constant="17" id="R8R-mE-MRe"/>
                                             <constraint firstItem="eVS-XF-WQi" firstAttribute="top" secondItem="PaX-hm-spQ" secondAttribute="top" constant="53" id="RD0-m1-1Yd"/>
                                             <constraint firstItem="nwQ-he-vGX" firstAttribute="top" secondItem="PaX-hm-spQ" secondAttribute="top" constant="31" id="Ta0-Ku-q4U"/>
-                                            <constraint firstItem="jMK-dm-Pa3" firstAttribute="top" secondItem="Z6r-OA-Lt2" secondAttribute="bottom" constant="16" id="UAi-4n-mGd"/>
+                                            <constraint firstItem="jMK-dm-Pa3" firstAttribute="top" secondItem="Z6r-OA-Lt2" secondAttribute="bottom" id="UAi-4n-mGd"/>
                                             <constraint firstItem="uME-cy-IwV" firstAttribute="top" secondItem="7wR-kz-FPl" secondAttribute="bottom" constant="16" id="XCq-jE-x8A"/>
                                             <constraint firstItem="Mb0-fV-M9M" firstAttribute="leading" secondItem="gr4-0C-OAQ" secondAttribute="leading" id="aBJ-FQ-RIy"/>
                                             <constraint firstAttribute="trailing" secondItem="nwQ-he-vGX" secondAttribute="trailing" id="bk8-bx-hxW"/>
-                                            <constraint firstItem="Z6r-OA-Lt2" firstAttribute="top" secondItem="uME-cy-IwV" secondAttribute="bottom" constant="8" symbolic="YES" id="bnH-pu-PfA"/>
+                                            <constraint firstItem="Z6r-OA-Lt2" firstAttribute="top" secondItem="uME-cy-IwV" secondAttribute="bottom" constant="-1" id="bnH-pu-PfA"/>
                                             <constraint firstItem="Z6r-OA-Lt2" firstAttribute="leading" secondItem="PaX-hm-spQ" secondAttribute="leading" constant="17" id="cBh-sL-not"/>
                                             <constraint firstItem="7wR-kz-FPl" firstAttribute="leading" secondItem="PaX-hm-spQ" secondAttribute="leading" constant="17" id="d10-Ny-UZt"/>
                                             <constraint firstItem="dyd-JS-c6h" firstAttribute="leading" secondItem="PaX-hm-spQ" secondAttribute="leading" constant="17" id="fhc-nT-yR2"/>
@@ -496,6 +496,7 @@
                         <outlet property="actorsLabel" destination="4en-Zt-9dd" id="xNC-KJ-Rw9"/>
                         <outlet property="awardsLabel" destination="vYO-nn-Z1C" id="XeN-1Y-UUi"/>
                         <outlet property="backgroundImage" destination="Yr0-a0-Ycd" id="BH5-IY-pzj"/>
+                        <outlet property="detailView" destination="PaX-hm-spQ" id="p3A-sa-3s7"/>
                         <outlet property="directorLabel" destination="gr4-0C-OAQ" id="Ku0-dA-6xK"/>
                         <outlet property="genreLabel" destination="eVS-XF-WQi" id="2ps-yT-Q3B"/>
                         <outlet property="imbdRating" destination="nwQ-he-vGX" id="pUN-bY-Mcf"/>
