@@ -129,14 +129,14 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bS-34-szX">
-                                <rect key="frame" x="51" y="91" width="272" height="251"/>
-                                <color key="backgroundColor" red="0.0058824717998504639" green="0.1327299177646637" blue="0.1697811484336853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="16" y="91" width="343" height="457"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="251" id="jUD-ro-xr9"/>
+                                    <constraint firstAttribute="height" constant="457" id="jUD-ro-xr9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="140"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="-27" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="+">
+                                <state key="normal">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -148,7 +148,7 @@
                                     <action selector="addButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8eV-id-0oO"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click to add a movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqh-go-jgU">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click here to add a movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqh-go-jgU">
                                 <rect key="frame" x="0.0" y="291" width="375" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2pd-Uh-Qde"/>
@@ -171,11 +171,11 @@
                             <constraint firstItem="tqh-go-jgU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="291" id="ls9-06-Gl7"/>
                             <constraint firstItem="t0r-gA-w56" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mhB-es-4pl"/>
                             <constraint firstAttribute="trailing" secondItem="mwE-dE-e0g" secondAttribute="trailing" id="nl5-eT-0bp"/>
-                            <constraint firstItem="2bS-34-szX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="35" id="oQU-wf-xJf"/>
+                            <constraint firstItem="2bS-34-szX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oQU-wf-xJf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oAX-br-Olc" secondAttribute="trailing" constant="-16" id="qCH-Mw-5Hb"/>
                             <constraint firstItem="oAX-br-Olc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="se1-mt-5Wh"/>
                             <constraint firstAttribute="trailing" secondItem="tqh-go-jgU" secondAttribute="trailing" id="v8u-jp-Ome"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2bS-34-szX" secondAttribute="trailing" constant="36" id="wwd-aX-SuJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2bS-34-szX" secondAttribute="trailing" id="wwd-aX-SuJ"/>
                             <constraint firstItem="2bS-34-szX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="91" id="xJW-Oy-Ubs"/>
                             <constraint firstItem="oAX-br-Olc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="yHz-fD-MVC"/>
                         </constraints>
@@ -195,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1603.5" y="792.5"/>
+            <point key="canvasLocation" x="1602.4000000000001" y="792.05397301349331"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="XVC-d1-dYY">
