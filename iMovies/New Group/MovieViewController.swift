@@ -43,6 +43,7 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.setGradientView()
         self.movieEntity = ServiceHelper().getMoviesCoreData()
         guard let moviesCount = self.movieEntity?.count else {
             return
@@ -52,7 +53,6 @@ class MovieViewController: UIViewController, UISearchBarDelegate {
             self.clickMovieLabel.isHidden = true
             self.containerView.isHidden = false
         } else {
-            self.setGradientView()
             self.addButton.isHidden = false
             self.clickMovieLabel.isHidden = false
         }
